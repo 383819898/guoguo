@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
  * 修改日期  :
  */
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/login")
 public class UserController {
 
   @Autowired

@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.guoguo.entity.User;
+import com.guoguo.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -28,10 +30,10 @@ public class ShiroAuthorizingRealm extends AuthorizingRealm {
     Logger logger = LoggerFactory.getLogger(ShiroAuthorizingRealm.class);
 
 
-  /*  @Resource
+    @Resource
     private UserService userService;
 
-    @Resource
+/*    @Resource
     private RoleService roleService;
 
     @Resource
@@ -47,8 +49,8 @@ public class ShiroAuthorizingRealm extends AuthorizingRealm {
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         String username = String.valueOf(principals.getPrimaryPrincipal());
         logger.info("权限检查----" + username + "-----------------");
-   /*     User param = new User();
-        param.setUserName(username);
+/*         User param = new User();
+       param.setUserName(username);
         final User user = userService.getSigle(param);
         if (user != null) {
             Role role = roleService.getSingle(user.getRoleId());
@@ -85,10 +87,11 @@ public class ShiroAuthorizingRealm extends AuthorizingRealm {
 
         SimpleAuthenticationInfo authenticationInfo = null;
         // 通过数据库进行验证
+/*
 
         try {
-    /*        User user = new User(username, password);
-            final User authenticatedUser = userService.getSigle(user);
+            User user = new User(username, password);
+            final User authenticatedUser = userService.getSigLle(user);
             if (authenticatedUser == null) {
                 throw new AuthenticationException("用户名或密码错误.");
             } else {
@@ -98,10 +101,11 @@ public class ShiroAuthorizingRealm extends AuthorizingRealm {
             }
 
             authenticationInfo = new SimpleAuthenticationInfo(username,
-                    password, authenticatedUser.getRealName());*/
+                    password, authenticatedUser.getRealName());
         } catch (Exception e) {
             e.printStackTrace();
         }
+*/
 
         return authenticationInfo;
     }

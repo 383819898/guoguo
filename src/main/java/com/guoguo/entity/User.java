@@ -1,6 +1,8 @@
 package com.guoguo.entity;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
 
     private Integer id;
     private String email;
@@ -10,6 +12,11 @@ public class User {
     private String sfz;
     private String truename;
     private String username;
+
+    public User(String password, String username) {
+        this.password = password;
+        this.username = username;
+    }
 
     public Integer getId() {
         return id;
