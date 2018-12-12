@@ -2,7 +2,7 @@ package com.guoguo.entity;
 
 import java.io.Serializable;
 
-public class User implements Serializable {
+public class User implements  Serializable{
 
     private Integer id;
     private String email;
@@ -16,6 +16,9 @@ public class User implements Serializable {
     public User(String password, String username) {
         this.password = password;
         this.username = username;
+    }
+
+    public User() {
     }
 
     public Integer getId() {
