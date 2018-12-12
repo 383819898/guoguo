@@ -38,6 +38,7 @@ public class UserController {
     User loginUser = userService.login(user);
     if (loginUser != null) {
       request.getSession().setAttribute("currentUser",loginUser);
+
       return "loginSuccess";
     }
     request.getSession().setAttribute("message","用户名或密码有误！！！");
