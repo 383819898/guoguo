@@ -87,11 +87,10 @@ public class ShiroAuthorizingRealm extends AuthorizingRealm {
 
         SimpleAuthenticationInfo authenticationInfo = null;
         // 通过数据库进行验证
-/*
 
         try {
             User user = new User(username, password);
-            final User authenticatedUser = userService.getSigLle(user);
+            final User authenticatedUser = userService.login(user);
             if (authenticatedUser == null) {
                 throw new AuthenticationException("用户名或密码错误.");
             } else {
@@ -101,11 +100,10 @@ public class ShiroAuthorizingRealm extends AuthorizingRealm {
             }
 
             authenticationInfo = new SimpleAuthenticationInfo(username,
-                    password, authenticatedUser.getRealName());
+                    password, authenticatedUser.getUsername());
         } catch (Exception e) {
             e.printStackTrace();
         }
-*/
 
         return authenticationInfo;
     }

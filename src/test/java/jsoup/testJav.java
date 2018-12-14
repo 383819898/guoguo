@@ -1,7 +1,7 @@
 package jsoup;
 
-import com.guoguo.util.JDBCTester;
-import com.guoguo.util.jav;
+/*import com.guoguo.util.JDBCTester;
+import com.guoguo.util.jav;*/
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -189,14 +189,44 @@ public class testJav {
                 "</div>".replace("\n","");
 
 
-        System.out.println(html);
+     //   System.out.println(html);
+        String l_name;
+        String l_pianshang;
+        String l_biaoqian;
+        String l_fanhao;
+        String l_faxingriqi;
+        String l_bofangshichang;
+        String l_zang;
+        String l_xilie;
 
         Document parse = Jsoup.parse(html);
 
-        List<Node> nodes = parse.childNodes();
+        Elements select = parse.select("div.col-md-9");
 
-        System.out.println(nodes);
+ /*       for (int i=0;i<select.size()){
 
+        }*/
+        //select.eq();
+
+        String[] split = select.toString().split("<br>");
+        int i=0;
+        for (String str:split
+             ) {
+
+            String[] split1 = Jsoup.parse(str).text().toString().split(":");
+            switch (split1[0]){
+
+                case "女优" : System.out.println(split1[1].trim());  break;
+                case "片商" : System.out.println(split1[1].trim());  break;
+                case "标签" : System.out.println(split1[1].trim().split(" ").length);  break;
+                case "番号" : System.out.println(split1[1].trim());  break;
+                case "发行日期" : System.out.println(split1[1].trim());  break;
+                case "播放时长" : System.out.println(split1[1].trim());  break;
+                case "赞" : System.out.println(split1[1].trim());  break;
+                case "系列" : System.out.println(split1[1].trim());  break;
+            }
+
+        }
 
     }
 
