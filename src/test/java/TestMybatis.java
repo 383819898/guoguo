@@ -1,5 +1,7 @@
 
+import com.guoguo.dao.GuoguoBookNameDAO;
 import com.guoguo.dao.IUserDao;
+import com.guoguo.entity.GuoguoBookName;
 import com.guoguo.entity.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,28 +29,29 @@ public class TestMybatis {
 
   Logger logger = LoggerFactory.getLogger(TestMybatis.class);
 
-  @Autowired
-  private IUserDao dao;
+/*  @Autowired
+  private IUserDao dao;*/
 
-  //@Test
-  public void testSelectUser() throws Exception {
-    Integer id = 1;
-    User user = dao.selectByPrimaryKey(id);
 
-      System.out.println(user.getUsername());
+    @Autowired
+    private GuoguoBookNameDAO guoguoBookNameDAO;
 
-/*      dao.deleteByPrimaryKey(2);*/
-      User login = dao.login(user);
+    @Test
+    public void testSelectUser() throws Exception {
+        GuoguoBookName guoguoBookName = new GuoguoBookName();
 
-      System.out.println(login.toString());
+        guoguoBookName.setGuoguoAuthor("3123");
+
+        guoguoBookNameDAO.insert(guoguoBookName);
+
 
   }
 
-  @Test
-  public void testlogic(){
+//  @Test
+    public void testlogic(){
       logger.info("logback 成功了1");
       logger.error("logback 成功了2");
       logger.debug("logback 成功了3");
 
-  }
+     }
 }

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.guoguo.dao.GuoguoChapterDAO">
+  <resultMap id="BaseResultMap" type="com.guoguo.entity.GuoguoChapter">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="guoguo_name" jdbcType="VARCHAR" property="guoguoName" />
+    <result column="guoguo_author" jdbcType="VARCHAR" property="guoguoAuthor" />
+    <result column="guoguo_ReadingNumber" jdbcType="INTEGER" property="guoguoReadingnumber" />
+    <result column="guoguo_PraisepointsNumber" jdbcType="VARCHAR" property="guoguoPraisepointsnumber" />
+    <result column="guoguo_CollectionNumber" jdbcType="INTEGER" property="guoguoCollectionnumber" />
+    <result column="guoguo_chapter" jdbcType="VARCHAR" property="guoguoChapter" />
+    <result column="guoguo_time" jdbcType="TIMESTAMP" property="guoguoTime" />
+    <result column="guoguo_update" jdbcType="TIMESTAMP" property="guoguoUpdate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, guoguo_name, guoguo_author, guoguo_ReadingNumber, guoguo_PraisepointsNumber, 
+    guoguo_CollectionNumber, guoguo_chapter, guoguo_time, guoguo_update
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from guoguo_chapter
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from guoguo_chapter
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.guoguo.entity.GuoguoChapter" useGeneratedKeys="true">
+    insert into guoguo_chapter (guoguo_name, guoguo_author, guoguo_ReadingNumber, 
+      guoguo_PraisepointsNumber, guoguo_CollectionNumber, 
+      guoguo_chapter, guoguo_time, guoguo_update
+      )
+    values (#{guoguoName,jdbcType=VARCHAR}, #{guoguoAuthor,jdbcType=VARCHAR}, #{guoguoReadingnumber,jdbcType=INTEGER}, 
+      #{guoguoPraisepointsnumber,jdbcType=VARCHAR}, #{guoguoCollectionnumber,jdbcType=INTEGER}, 
+      #{guoguoChapter,jdbcType=VARCHAR}, #{guoguoTime,jdbcType=TIMESTAMP}, #{guoguoUpdate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.guoguo.entity.GuoguoChapter" useGeneratedKeys="true">
+    insert into guoguo_chapter
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="guoguoName != null">
+        guoguo_name,
+      </if>
+      <if test="guoguoAuthor != null">
+        guoguo_author,
+      </if>
+      <if test="guoguoReadingnumber != null">
+        guoguo_ReadingNumber,
+      </if>
+      <if test="guoguoPraisepointsnumber != null">
+        guoguo_PraisepointsNumber,
+      </if>
+      <if test="guoguoCollectionnumber != null">
+        guoguo_CollectionNumber,
+      </if>
+      <if test="guoguoChapter != null">
+        guoguo_chapter,
+      </if>
+      <if test="guoguoTime != null">
+        guoguo_time,
+      </if>
+      <if test="guoguoUpdate != null">
+        guoguo_update,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="guoguoName != null">
+        #{guoguoName,jdbcType=VARCHAR},
+      </if>
+      <if test="guoguoAuthor != null">
+        #{guoguoAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="guoguoReadingnumber != null">
+        #{guoguoReadingnumber,jdbcType=INTEGER},
+      </if>
+      <if test="guoguoPraisepointsnumber != null">
+        #{guoguoPraisepointsnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="guoguoCollectionnumber != null">
+        #{guoguoCollectionnumber,jdbcType=INTEGER},
+      </if>
+      <if test="guoguoChapter != null">
+        #{guoguoChapter,jdbcType=VARCHAR},
+      </if>
+      <if test="guoguoTime != null">
+        #{guoguoTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="guoguoUpdate != null">
+        #{guoguoUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.guoguo.entity.GuoguoChapter">
+    update guoguo_chapter
+    <set>
+      <if test="guoguoName != null">
+        guoguo_name = #{guoguoName,jdbcType=VARCHAR},
+      </if>
+      <if test="guoguoAuthor != null">
+        guoguo_author = #{guoguoAuthor,jdbcType=VARCHAR},
+      </if>
+      <if test="guoguoReadingnumber != null">
+        guoguo_ReadingNumber = #{guoguoReadingnumber,jdbcType=INTEGER},
+      </if>
+      <if test="guoguoPraisepointsnumber != null">
+        guoguo_PraisepointsNumber = #{guoguoPraisepointsnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="guoguoCollectionnumber != null">
+        guoguo_CollectionNumber = #{guoguoCollectionnumber,jdbcType=INTEGER},
+      </if>
+      <if test="guoguoChapter != null">
+        guoguo_chapter = #{guoguoChapter,jdbcType=VARCHAR},
+      </if>
+      <if test="guoguoTime != null">
+        guoguo_time = #{guoguoTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="guoguoUpdate != null">
+        guoguo_update = #{guoguoUpdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.guoguo.entity.GuoguoChapter">
+    update guoguo_chapter
+    set guoguo_name = #{guoguoName,jdbcType=VARCHAR},
+      guoguo_author = #{guoguoAuthor,jdbcType=VARCHAR},
+      guoguo_ReadingNumber = #{guoguoReadingnumber,jdbcType=INTEGER},
+      guoguo_PraisepointsNumber = #{guoguoPraisepointsnumber,jdbcType=VARCHAR},
+      guoguo_CollectionNumber = #{guoguoCollectionnumber,jdbcType=INTEGER},
+      guoguo_chapter = #{guoguoChapter,jdbcType=VARCHAR},
+      guoguo_time = #{guoguoTime,jdbcType=TIMESTAMP},
+      guoguo_update = #{guoguoUpdate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
