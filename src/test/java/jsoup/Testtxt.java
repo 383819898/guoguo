@@ -1,6 +1,7 @@
 package jsoup;
 
 import com.guoguo.entity.GuoguoBookName;
+import com.guoguo.entity.GuoguoChapter;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -11,7 +12,7 @@ import java.io.IOException;
 import java.util.Map;
 
 public class Testtxt {
-
+    String url ="http://www.baoliny.com";
    // @Test
     public void getbaiduTXT(){
 
@@ -30,18 +31,7 @@ public class Testtxt {
 
     }
 
-
-    /*        <li><a href="http://www.baoliny.com/">首页</a></li>
-<li><a href="/modules/article/bookcase.php">我的书架</a></li>
-<li><a href="http://www.baoliny.com/sort_1_1.html">玄幻小说</a></li>
-<li><a href="http://www.baoliny.com/sort_2_1.html">武侠小说</a></li>
-<li><a href="http://www.baoliny.com/sort_3_1.html">都市小说</a></li>
-<li><a href="http://www.baoliny.com/sort_4_1.html">穿越小说</a></li>
-<li><a href="http://www.baoliny.com/sort_5_1.html">网游小说</a></li>
-<li><a href="http://www.baoliny.com/sort_6_1.html">科幻小说</a></li>
-<li><a href="http://www.baoliny.com/sort_7_1.html">其他小说</a></li>
-<li><a href="http://www.baoliny.com/lastupdate_1.html">更新列表</a></li>*/
-   // @Test
+   @Test
     public void getPage(){
 
         try {
@@ -57,10 +47,13 @@ public class Testtxt {
                 for (int j=0; j<select.size(); j++) {
 
                     guoguoBookName.setGuoguoName(select.get(j).select("span").get(0).text());
+
                     guoguoBookName.setGuoguoChapter(select.get(j).select("span").get(1).text());
                     guoguoBookName.setGuoguoAuthor(select.get(j).select("span").get(2).text());
-                    System.out.println(guoguoBookName.toString());
-                    System.out.println(document.select("div.l ul li").size());
+        /*            System.out.println(guoguoBookName.toString());
+                    System.out.println(document.select("div.l ul li").size());*/
+                    String attr = select.get(j).select("span").get(0).select("a").attr("href");
+                    getChapter(url+attr, guoguoBookName);
                 }
             }
 
@@ -70,14 +63,31 @@ public class Testtxt {
 
     }
 
-//    @Test
-    public void getChapter(){
+    //@Test
+    public void getChapter(String url, GuoguoBookName guoguoBookName){
 
         try {
-            Document document = Jsoup.connect("http://www.baoliny.com/489/index.html").ignoreContentType(true).get();
+            Document document = Jsoup.connect(url).ignoreContentType(true).get();
+
+            for (int i =1; i< document.select("table.acss").select("td").size(); i++){
+                GuoguoChapter guoguoChapter = new GuoguoChapter();
+
+                String text = document.select("table.acss").select("td").get(i).select("a").text();
+
+                String attr = document.select("table.acss").select("td").get(i).select("a").attr("href");
+                String gettext = gettext(attr);
+                guoguoChapter.setGuoguoName(guoguoBookName.getGuoguoName());
+                guoguoChapter.setGuoguoChapter(guoguoBookName.getGuoguoChapter());
+                guoguoChapter.setGuoguoAuthor(guoguoBookName.getGuoguoAuthor());
+                guoguoChapter.setGuoguoChapter(text);
+                guoguoChapter.setGuoguoContent(gettext);
 
 
-            System.out.println(document.select("table.acss").select("td"));
+            }
+
+
+
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -85,67 +95,20 @@ public class Testtxt {
 
     }
 
-    @Test
-    public void gettext(){
+  //  @Test
+    public String gettext(String url){
 
+        String content = null;
 
         try {
             Document document = Jsoup.connect("http://www.baoliny.com/489/322922.html").ignoreContentType(true).get();
 
-            System.out.println(document);
+            content = document.getElementById("content").toString();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        return content;
     }
-
- //   @Test
-    public void testhttp(){
-
-
-            try {
-                Connection conn = Jsoup.connect("http://www.baoliny.com/489/322922.html");
-                conn.header("Host","xueqiu.com");
-                conn.header("Connection","keep-alive");
-                conn.header("Cache-Control","max-age=0");
-                conn.header("Upgrade-Insecure-Requests","1");
-                conn.header("User-Agent","Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36");
-                conn.header("Accept","text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
-//          conn.header("Accept-Encoding","gzip, deflate, sdch, br");
-                conn.header("Accept-Language","zh-CN,zh;q=0.8");
-                conn.header("Cookie",returnCookies());
-                conn.method(Connection.Method.GET);
-                conn.followRedirects(false);
-                conn.ignoreContentType(true);
-                Connection.Response response = conn.execute();
-                String body = response.body();
-                System.out.println(body);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-    }
-    public static  final String returnCookies() {
-
-        try {
-            Connection conn = Jsoup.connect("http://www.baoliny.com");
-            conn.method(Connection.Method.GET);
-            conn.followRedirects(false);
-            Connection.Response response;
-            response = conn.execute();
-            Map<String, String> getCookies = response.cookies();
-            String Cookie = getCookies.toString();
-            Cookie = Cookie.substring(Cookie.indexOf("{")+1, Cookie.lastIndexOf("}"));
-            Cookie = Cookie.replaceAll(",", ";");
-            return Cookie;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-
-    }
-
 
 }

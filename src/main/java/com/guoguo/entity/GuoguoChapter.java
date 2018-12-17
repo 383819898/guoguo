@@ -26,6 +26,8 @@ public class GuoguoChapter implements Serializable {
 
     private Date guoguoUpdate;
 
+    private String guoguoContent;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -100,6 +102,14 @@ public class GuoguoChapter implements Serializable {
         this.guoguoUpdate = guoguoUpdate;
     }
 
+    public String getGuoguoContent() {
+        return guoguoContent;
+    }
+
+    public void setGuoguoContent(String guoguoContent) {
+        this.guoguoContent = guoguoContent;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -120,7 +130,8 @@ public class GuoguoChapter implements Serializable {
             && (this.getGuoguoCollectionnumber() == null ? other.getGuoguoCollectionnumber() == null : this.getGuoguoCollectionnumber().equals(other.getGuoguoCollectionnumber()))
             && (this.getGuoguoChapter() == null ? other.getGuoguoChapter() == null : this.getGuoguoChapter().equals(other.getGuoguoChapter()))
             && (this.getGuoguoTime() == null ? other.getGuoguoTime() == null : this.getGuoguoTime().equals(other.getGuoguoTime()))
-            && (this.getGuoguoUpdate() == null ? other.getGuoguoUpdate() == null : this.getGuoguoUpdate().equals(other.getGuoguoUpdate()));
+            && (this.getGuoguoUpdate() == null ? other.getGuoguoUpdate() == null : this.getGuoguoUpdate().equals(other.getGuoguoUpdate()))
+            && (this.getGuoguoContent() == null ? other.getGuoguoContent() == null : this.getGuoguoContent().equals(other.getGuoguoContent()));
     }
 
     @Override
@@ -136,6 +147,7 @@ public class GuoguoChapter implements Serializable {
         result = prime * result + ((getGuoguoChapter() == null) ? 0 : getGuoguoChapter().hashCode());
         result = prime * result + ((getGuoguoTime() == null) ? 0 : getGuoguoTime().hashCode());
         result = prime * result + ((getGuoguoUpdate() == null) ? 0 : getGuoguoUpdate().hashCode());
+        result = prime * result + ((getGuoguoContent() == null) ? 0 : getGuoguoContent().hashCode());
         return result;
     }
 
@@ -154,6 +166,7 @@ public class GuoguoChapter implements Serializable {
         sb.append(", guoguoChapter=").append(guoguoChapter);
         sb.append(", guoguoTime=").append(guoguoTime);
         sb.append(", guoguoUpdate=").append(guoguoUpdate);
+        sb.append(", guoguoContent=").append(guoguoContent);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
