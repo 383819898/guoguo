@@ -34,7 +34,7 @@ public class Testtxt {
 
     }
 
-   @Test
+  // @Test
     public void getPage(){
 
         try {
@@ -114,7 +114,7 @@ public class Testtxt {
         return content;
     }
 
-    @Test
+  //  @Test
     public String gettext(){
 
         String content = null;
@@ -130,8 +130,9 @@ public class Testtxt {
         return content;
     }
 
+    public String toString() {
 
 
-
-
+        return super.toString();
+    }
 }

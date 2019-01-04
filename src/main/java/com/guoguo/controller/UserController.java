@@ -1,16 +1,20 @@
 package com.guoguo.controller;
 
+import com.guoguo.dao.BookDAO;
 import com.guoguo.dao.GuoguoBookNameDAO;
 import com.guoguo.dao.GuoguoChapterDAO;
+import com.guoguo.entity.Book;
 import com.guoguo.entity.GuoguoBookName;
 import com.guoguo.entity.GuoguoChapter;
 import com.guoguo.entity.User;
 import com.guoguo.service.UserService;
+import com.guoguo.util.qidianTXT;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +26,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * com.chen.ssm.web
@@ -35,17 +41,31 @@ import java.io.StringWriter;
 public class UserController {
 
   @Autowired
+  private BookDAO bookDAO;
+
+
+  @Autowired
   private UserService userService;
 
   Logger logger = LoggerFactory.getLogger(UserController.class);
   String urlAll ="http://www.baoliny.com";
-
+  private  String qidianURl ="https://www.qidian.com/all?orderId=&style=2&pageSize=50&siteid=1&pubflag=0&hiddenField=0&page=1";
 
   @Autowired
   private GuoguoBookNameDAO guoguoBookNameDAO;
 
   @Autowired
   private GuoguoChapterDAO guoguoChapterDAO;
+
+/*
+
+  public void qidianTXT() {
+
+    qidianTXT.getTXTALL();
+
+  }*/
+
+
 
   @RequestMapping("/test")
   public String test() {
@@ -202,5 +222,53 @@ public class UserController {
       logger.error("错误信息："+stringWriter.toString());
     }
     return content;
+  }
+
+
+
+
+  @RequestMapping("/qidianTXT")
+  public  String getTXTALL(){
+    //21756
+    List<String> list = new ArrayList<String>();
+    Document document = null;
+    for (int i= 1; i<= 21756 ;i++){
+    try {
+
+
+        String url = "https://www.qidian.com/all?orderId=&style=2&pageSize=50&siteid=1&pubflag=0&hiddenField=0&page=";
+        document = Jsoup.connect(url+""+i).ignoreContentType(true).get();
+
+
+    } catch (IOException e) {
+      e.printStackTrace();
+      logger.error("");
+    }
+    if (document != null){
+      //   System.out.println(document.select("tbody tr"));
+      Elements tbody_tr = document.select("tbody tr");
+
+      for (Element element:tbody_tr ) {
+        Book book = new Book();
+           /*     System.out.println(element.select("td").get(1).select("a").attr("data-bid"));
+                System.out.println(element.select("td").get(1).text());
+                System.out.println(element.select("td").get(4).text());*/
+        String bookId = element.select("td").get(1).select("a").attr("data-bid");
+        String name = element.select("td").get(1).text();
+        String author = element.select("td").get(4).text();
+        book.setBookId(Long.valueOf(bookId));
+        book.setName(name);
+        book.setAuthor(author);
+        bookDAO.insert(book);
+
+
+      }
+
+
+    }
+    //    System.out.println(document)
+    }
+
+    return null;
   }
 }
