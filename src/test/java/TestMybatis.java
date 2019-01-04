@@ -57,7 +57,7 @@ public class TestMybatis {
 
   }*/
 
-    @Test
+ //   @Test
     public void getPage(){
 
         try {

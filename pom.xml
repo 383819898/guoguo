@@ -45,6 +45,26 @@
 
 
   <dependencies>
+
+
+    <dependency>
+      <groupId>oracle.apps</groupId>
+      <artifactId>fndcp</artifactId>
+      <version>1.0.0-SNAPSHORT</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/src/main/resources/lib/fndcp.jar</systemPath>
+    </dependency>
+
+      <dependency>
+      <groupId>oracle.apps</groupId>
+      <artifactId>fndutil</artifactId>
+      <version>1.0.0-SNAPSHORT</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/src/main/resources/lib/fndutil.jar</systemPath>
+    </dependency>
+
+
+
     <!-- 添加jstl依赖 -->
     <dependency>
       <groupId>jstl</groupId>
@@ -169,11 +189,13 @@
       <version>${slf4j.version}</version>
       <scope>compile</scope>
     </dependency>
+<!--
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-log4j12</artifactId>
       <version>${slf4j.version}</version>
     </dependency>
+-->
 
     <dependency>
       <groupId>ch.qos.logback</groupId>
