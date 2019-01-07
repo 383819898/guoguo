@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -111,8 +112,6 @@ public class UserController {
           }
         }
       }
-
-
 
 
     return "list";
@@ -230,19 +229,25 @@ public class UserController {
   @RequestMapping("/qidianTXT")
   public  String getTXTALL(){
     //21756
-    List<String> list = new ArrayList<String>();
-    Document document = null;
-    for (int i= 1; i<= 21756 ;i++){
+
+
+    for (int i= 1; i<= 3265 ;i++){
+      List<String> list = new ArrayList<String>();
+      Document document = null;
+      String url = null;
     try {
 
 
-        String url = "https://www.qidian.com/all?orderId=&style=2&pageSize=50&siteid=1&pubflag=0&hiddenField=0&page=";
-        document = Jsoup.connect(url+""+i).ignoreContentType(true).get();
+        url = "https://www.qidian.com/all?chanId=4&orderId=&style=2&pageSize=50&siteid=1&pubflag=0&hiddenField=0&page="+i;
+        document = Jsoup.connect(url).ignoreContentType(true).get();
 
 
     } catch (IOException e) {
       e.printStackTrace();
-      logger.error("");
+      logger.error(url);
+    }catch (Exception e1){
+      e1.printStackTrace();
+      logger.error(url);
     }
     if (document != null){
       //   System.out.println(document.select("tbody tr"));
@@ -259,8 +264,15 @@ public class UserController {
         book.setBookId(Long.valueOf(bookId));
         book.setName(name);
         book.setAuthor(author);
-        bookDAO.insert(book);
+        book.setPage(i);
+        book.setType("都市");
+        book.setDatatime(new Date());
+        try{
+          bookDAO.insert(book);
+        }catch (Exception e){
+            e.getStackTrace();
 
+        }
 
       }
 

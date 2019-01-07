@@ -5,9 +5,13 @@
     <id column="book_id" jdbcType="BIGINT" property="bookId" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="author" jdbcType="VARCHAR" property="author" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="page" jdbcType="INTEGER" property="page" />
+    <result column="type_1" jdbcType="VARCHAR" property="type1" />
+    <result column="datatime" jdbcType="TIMESTAMP" property="datatime" />
   </resultMap>
   <sql id="Base_Column_List">
-    book_id, `name`, author
+    book_id, `name`, author, `type`, page, type_1, datatime
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -20,10 +24,12 @@
     where book_id = #{bookId,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.guoguo.entity.Book">
-    insert into book (book_id, `name`, author
-      )
-    values (#{bookId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}
-      )
+    insert into book (book_id, `name`, author, 
+      `type`, page, type_1, 
+      datatime)
+    values (#{bookId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{page,jdbcType=INTEGER}, #{type1,jdbcType=VARCHAR}, 
+      #{datatime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.guoguo.entity.Book">
     insert into book
@@ -37,6 +43,18 @@
       <if test="author != null">
         author,
       </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="page != null">
+        page,
+      </if>
+      <if test="type1 != null">
+        type_1,
+      </if>
+      <if test="datatime != null">
+        datatime,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="bookId != null">
@@ -47,6 +65,18 @@
       </if>
       <if test="author != null">
         #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="page != null">
+        #{page,jdbcType=INTEGER},
+      </if>
+      <if test="type1 != null">
+        #{type1,jdbcType=VARCHAR},
+      </if>
+      <if test="datatime != null">
+        #{datatime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -59,13 +89,29 @@
       <if test="author != null">
         author = #{author,jdbcType=VARCHAR},
       </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="page != null">
+        page = #{page,jdbcType=INTEGER},
+      </if>
+      <if test="type1 != null">
+        type_1 = #{type1,jdbcType=VARCHAR},
+      </if>
+      <if test="datatime != null">
+        datatime = #{datatime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where book_id = #{bookId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.guoguo.entity.Book">
     update book
     set `name` = #{name,jdbcType=VARCHAR},
-      author = #{author,jdbcType=VARCHAR}
+      author = #{author,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=VARCHAR},
+      page = #{page,jdbcType=INTEGER},
+      type_1 = #{type1,jdbcType=VARCHAR},
+      datatime = #{datatime,jdbcType=TIMESTAMP}
     where book_id = #{bookId,jdbcType=BIGINT}
   </update>
 </mapper>

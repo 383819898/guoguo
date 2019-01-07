@@ -1,12 +1,15 @@
 
+import com.guoguo.dao.BookDAO;
 import com.guoguo.dao.GuoguoBookNameDAO;
 import com.guoguo.dao.GuoguoChapterDAO;
 import com.guoguo.dao.IUserDao;
+import com.guoguo.entity.Book;
 import com.guoguo.entity.GuoguoBookName;
 import com.guoguo.entity.GuoguoChapter;
 import com.guoguo.entity.User;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,6 +21,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * PACKAGE_NAME
@@ -45,6 +51,11 @@ public class TestMybatis {
 
     @Autowired
     private GuoguoChapterDAO guoguoChapterDAO;
+
+
+
+    @Autowired
+    private BookDAO bookDAO;
 
 /*    @Test
     public void testSelectUser() throws Exception {
@@ -144,12 +155,61 @@ public class TestMybatis {
 
 
 
+    @Test
+    public  void getTXTALL(){
+        //21756
 
-//  @Test
-    public void testlogic(){
-      logger.info("logback 成功了1");
-      logger.error("logback 成功了2");
-      logger.debug("logback 成功了3");
 
-     }
+        for (int i= 1; i<= 1696 ;i++){
+            List<String> list = new ArrayList<String>();
+            Document document = null;
+            String url = null;
+            try {
+
+
+                url = "https://www.qidian.com/all?chanId=1&orderId=&style=2&pageSize=50&siteid=1&pubflag=0&hiddenField=0&page="+i;
+                document = Jsoup.connect(url).ignoreContentType(true).get();
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                logger.error(url);
+            }catch (Exception e1){
+                e1.printStackTrace();
+                logger.error(url);
+            }
+            if (document != null){
+                //   System.out.println(document.select("tbody tr"));
+                Elements tbody_tr = document.select("tbody tr");
+
+                for (Element element:tbody_tr ) {
+                    Book book = new Book();
+           /*     System.out.println(element.select("td").get(1).select("a").attr("data-bid"));
+                System.out.println(element.select("td").get(1).text());
+                System.out.println(element.select("td").get(4).text());*/
+                    String bookId = element.select("td").get(1).select("a").attr("data-bid");
+                    String name = element.select("td").get(1).text();
+                    String author = element.select("td").get(4).text();
+                    book.setBookId(Long.valueOf(bookId));
+                    book.setName(name);
+                    book.setAuthor(author);
+                    book.setPage(i);
+                    book.setType("奇幻");
+                    book.setType1("东方玄幻");
+                    book.setDatatime(new Date());
+                    try{
+                        bookDAO.insert(book);
+                    }catch (Exception e){
+                        e.getStackTrace();
+
+                    }
+
+                }
+
+
+            }
+            //    System.out.println(document)
+        }
+
+    }
 }

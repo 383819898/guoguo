@@ -22,7 +22,7 @@ public class qidianTXT {
 
 
     Logger logger = LoggerFactory.getLogger(qidianTXT.class);
-    private  static String url ="https://www.qidian.com/all?orderId=&style=2&pageSize=50&siteid=1&pubflag=0&hiddenField=0&page=1";
+    private  static String url ="https://www.qidian.com/all?orderId=&style=2&pageSize=50&siteid=1&pubflag=0&hiddenField=0&page=375";
 
     //获取分类
     public static List<String> getClassification(){
@@ -53,6 +53,8 @@ public class qidianTXT {
         try {
 
             document = Jsoup.connect(url).ignoreContentType(true).get();
+
+
 
         } catch (IOException e) {
             e.printStackTrace();
