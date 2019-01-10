@@ -90,6 +90,7 @@
                 /login/login** = anon
                 /doLogin/** = anon
                 /jsp/** = anon
+                /txt/** = anon
                 /page/** = anon
                 <!-- 静态资源允许访问 -->
                 /static/** = anon

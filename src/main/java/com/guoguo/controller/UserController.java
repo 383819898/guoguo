@@ -1,12 +1,10 @@
 package com.guoguo.controller;
 
 import com.guoguo.dao.BookDAO;
+import com.guoguo.dao.BooksDAO;
 import com.guoguo.dao.GuoguoBookNameDAO;
 import com.guoguo.dao.GuoguoChapterDAO;
-import com.guoguo.entity.Book;
-import com.guoguo.entity.GuoguoBookName;
-import com.guoguo.entity.GuoguoChapter;
-import com.guoguo.entity.User;
+import com.guoguo.entity.*;
 import com.guoguo.service.UserService;
 import com.guoguo.util.qidianTXT;
 import org.apache.shiro.SecurityUtils;
@@ -43,6 +41,9 @@ public class UserController {
 
   @Autowired
   private BookDAO bookDAO;
+
+  @Autowired
+  private BooksDAO booksDAO;
 
 
   @Autowired
@@ -133,9 +134,6 @@ public class UserController {
 
       Subject subject = SecurityUtils.getSubject(); // 获取Subject单例对象
       subject.login(token); // 登陆
-
-
-
 
       return "loginSuccess";
     }
@@ -231,16 +229,14 @@ public class UserController {
     //21756
 
 
-    for (int i= 1; i<= 3265 ;i++){
+    for (int i= 1; i<= 546 ;i++){
       List<String> list = new ArrayList<String>();
       Document document = null;
       String url = null;
     try {
 
-
-        url = "https://www.qidian.com/all?chanId=4&orderId=&style=2&pageSize=50&siteid=1&pubflag=0&hiddenField=0&page="+i;
+        url = "https://www.qidian.com/all?chanId=20076&orderId=&style=2&pageSize=50&siteid=1&pubflag=0&hiddenField=0&page="+i;
         document = Jsoup.connect(url).ignoreContentType(true).get();
-
 
     } catch (IOException e) {
       e.printStackTrace();
@@ -252,7 +248,7 @@ public class UserController {
     if (document != null){
       //   System.out.println(document.select("tbody tr"));
       Elements tbody_tr = document.select("tbody tr");
-
+      logger.info(tbody_tr.text());
       for (Element element:tbody_tr ) {
         Book book = new Book();
            /*     System.out.println(element.select("td").get(1).select("a").attr("data-bid"));
@@ -265,8 +261,9 @@ public class UserController {
         book.setName(name);
         book.setAuthor(author);
         book.setPage(i);
-        book.setType("都市");
+        book.setType("短篇");//军事  ， 历史  ，游戏，体育，科幻，灵异，二次元，短篇
         book.setDatatime(new Date());
+
         try{
           bookDAO.insert(book);
         }catch (Exception e){
@@ -276,11 +273,40 @@ public class UserController {
 
       }
 
-
     }
     //    System.out.println(document)
     }
-
     return null;
   }
+
+  @RequestMapping("/qidianTXTsync")
+  public  void getTXTALLsync(){
+
+
+    for (int i = 95; i <6694 ; i++) {
+      BookExample example = new BookExample();
+
+      System.out.println("====================================================");
+      System.out.println("i::::::::::"+i);
+      System.out.println("====================================================");
+      example.or().andPageBetween(i,i);
+      List<Book> books = bookDAO.selectByExample(example);
+
+      for (Book book:books) {
+
+        Books txtContent = qidianTXT.getTXTContent(new Long(book.getBookId()));
+        txtContent.setBookId(book.getBookId());
+        txtContent.setName(book.getName());
+        txtContent.setAuthor(book.getAuthor());
+        txtContent.setPage(book.getPage());
+        txtContent.setType(book.getType());
+        booksDAO.insert(txtContent);
+      }
+    }
+
+    //   System.out.println(books);
+
+
+  }
+
 }

@@ -1,11 +1,32 @@
 package com.guoguo.dao;
 
 import com.guoguo.entity.Book;
+import com.guoguo.entity.BookExample;
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
-/**
- * BookDAO继承基类
- */
 @Repository
-public interface BookDAO extends MyBatisBaseDao<Book, Long> {
+public interface BookDAO {
+    long countByExample(BookExample example);
+
+    int deleteByExample(BookExample example);
+
+    int deleteByPrimaryKey(Long bookId);
+
+    int insert(Book record);
+
+    int insertSelective(Book record);
+
+    List<Book> selectByExample(BookExample example);
+
+    Book selectByPrimaryKey(Long bookId);
+
+    int updateByExampleSelective(@Param("record") Book record, @Param("example") BookExample example);
+
+    int updateByExample(@Param("record") Book record, @Param("example") BookExample example);
+
+    int updateByPrimaryKeySelective(Book record);
+
+    int updateByPrimaryKey(Book record);
 }
