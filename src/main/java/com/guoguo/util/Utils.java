@@ -98,6 +98,21 @@ public class Utils {
 
         HashMap<String, String> map = printAllPropertyList("/TXTURL.properties");
 
+        String url = map.get("url");
+
+        String[] split = url.split(";");
+
+        System.out.println(split.length);
+        System.out.println(split[0]);
+
+        for (int i = 0;  i< split.length; i++){
+            System.out.println(map.get(split[i]+".url"));
+            System.out.println(map.get(split[i]+".index"));
+            System.out.println(map.get(split[i]+".class"));
+
+        }
+
+
         System.out.println(map);
  /*       Properties properties = new Properties();
         InputStream inputStream = Utils.class.getResourceAsStream("/TXTURL.properties");
