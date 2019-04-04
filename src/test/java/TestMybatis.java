@@ -1,4 +1,3 @@
-/*
 
 import com.guoguo.dao.BookDAO;
 import com.guoguo.dao.GuoguoBookNameDAO;
@@ -26,31 +25,25 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-*/
 /**
  * PACKAGE_NAME
  * 作者      : 陈晓
  * 描述      :
  * 创建日期  : 2017/12/5
  * 修改日期  :
- *//*
-
+ */
 
 @RunWith(SpringJUnit4ClassRunner.class)     //表示继承了SpringJUnit4ClassRunner类
 @ContextConfiguration(locations = {"classpath*:spring-mvc.xml","classpath*:spring-mybatis.xml"})
 @WebAppConfiguration("src/main/resources")
 public class TestMybatis {
 
- */
-/* private static Logger logger = LoggerFactory.getLogger(TestMybatis.class);*//*
-
+ /* private static Logger logger = LoggerFactory.getLogger(TestMybatis.class);*/
 
     Logger logger = LoggerFactory.getLogger(TestMybatis.class);
     String urlAll ="http://www.baoliny.com";
-*/
 /*  @Autowired
-  private IUserDao dao;*//*
-
+  private IUserDao dao;*/
 
 
     @Autowired
@@ -64,7 +57,6 @@ public class TestMybatis {
     @Autowired
     private BookDAO bookDAO;
 
-*/
 /*    @Test
     public void testSelectUser() throws Exception {
         GuoguoBookName guoguoBookName = new GuoguoBookName();
@@ -74,8 +66,7 @@ public class TestMybatis {
         guoguoBookNameDAO.insert(guoguoBookName);
 
 
-  }*//*
-
+  }*/
 
  //   @Test
     public void getPage(){
@@ -96,10 +87,8 @@ public class TestMybatis {
 
                     guoguoBookName.setGuoguoChapter(select.get(j).select("span").get(1).text());
                     guoguoBookName.setGuoguoAuthor(select.get(j).select("span").get(2).text());
-        */
-/*            System.out.println(guoguoBookName.toString());
-                    System.out.println(document.select("div.l ul li").size());*//*
-
+        /*            System.out.println(guoguoBookName.toString());
+                    System.out.println(document.select("div.l ul li").size());*/
 
                     guoguoBookNameDAO.insert(guoguoBookName);
                     String attr = select.get(j).select("span").get(0).select("a").attr("href");
@@ -195,11 +184,9 @@ public class TestMybatis {
 
                 for (Element element:tbody_tr ) {
                     Book book = new Book();
-           */
-/*     System.out.println(element.select("td").get(1).select("a").attr("data-bid"));
+           /*     System.out.println(element.select("td").get(1).select("a").attr("data-bid"));
                 System.out.println(element.select("td").get(1).text());
-                System.out.println(element.select("td").get(4).text());*//*
-
+                System.out.println(element.select("td").get(4).text());*/
                     String bookId = element.select("td").get(1).select("a").attr("data-bid");
                     String name = element.select("td").get(1).text();
                     String author = element.select("td").get(4).text();
@@ -226,4 +213,3 @@ public class TestMybatis {
 
     }
 }
-*/
