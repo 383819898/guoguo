@@ -48,6 +48,7 @@ public class UserController {
   @Autowired
   private UserService userService;
 
+
   Logger logger = LoggerFactory.getLogger(UserController.class);
   String urlAll ="http://www.baoliny.com";
   private  String qidianURl ="https://www.qidian.com/all?orderId=&style=2&pageSize=50&siteid=1&pubflag=0&hiddenField=0&page=1";
@@ -135,14 +136,13 @@ public class UserController {
       subject.login(token); // 登陆
 
 
-
-
       return "loginSuccess";
     }
     request.getSession().setAttribute("message","用户名或密码有误！！！");
-    System.out.println(loginUser.getUsername());
-    return "login";
+    return "index";
   }
+
+
 
   @RequestMapping("/search")
   public String search() {

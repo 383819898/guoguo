@@ -61,7 +61,7 @@
                     <div class="form-top">
                         <div class="form-top-left">
                             <h3>
-                                <center>机票管理系统后台登陆</center>
+                                <center>用户登陆</center>
                             </h3>
                             <p>Enter your username and password to log on:</p>
                             <p><a style="color: red;" id="login_prompt"><h3><%=message%>

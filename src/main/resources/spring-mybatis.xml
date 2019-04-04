@@ -88,6 +88,7 @@
             <value>
                 <!-- 登录页允许访问 -->
                 /login/login** = anon
+                /demo/** = anon
                 /doLogin/** = anon
                 /jsp/** = anon
                 /page/** = anon
