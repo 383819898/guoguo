@@ -1,11 +1,8 @@
-package com.guoguo.shiro;
 
-import java.util.List;
+package com.guoguo.shiro;
 
 import javax.annotation.Resource;
 
-import com.guoguo.entity.User;
-import com.guoguo.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -25,23 +22,30 @@ import org.slf4j.LoggerFactory;
  * 用户身份验证,授权 Realm 组件
  * 
  **/
+
 public class ShiroAuthorizingRealm extends AuthorizingRealm {
 
     Logger logger = LoggerFactory.getLogger(ShiroAuthorizingRealm.class);
 
 
-    @Resource
-    private UserService userService;
 
+/*    @Resource
+    private UserService userService;*//*
+
+
+*/
 /*    @Resource
     private RoleService roleService;
 
     @Resource
-    private PermissionService permissionService;*/
+    private PermissionService permissionService;*//*
 
-    /**
+
+    */
+/**
      * 权限检查
      */
+
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(
             PrincipalCollection principals) {
@@ -72,13 +76,22 @@ public class ShiroAuthorizingRealm extends AuthorizingRealm {
 
             }
         }*/
+
         return authorizationInfo;
     }
 
-    /**
-     * 登录验证
-     */
     @Override
+    protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
+        return null;
+    }
+
+
+/**
+     * 登录验证
+     *//*
+
+ */
+/*   @Override
     protected AuthenticationInfo doGetAuthenticationInfo(
             AuthenticationToken token) throws AuthenticationException {
         logger.info("登录验证");
@@ -107,6 +120,7 @@ public class ShiroAuthorizingRealm extends AuthorizingRealm {
 
         return authenticationInfo;
     }
+*/
 
 
 
