@@ -30,7 +30,9 @@ public class ShiroAuthorizingRealm extends AuthorizingRealm {
 
 
 /*    @Resource
-    private UserService userService;*//*
+    private UserService userService;*/
+
+/*
 
 
 */

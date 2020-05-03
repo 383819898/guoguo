@@ -94,8 +94,8 @@
                 /txt/** = anon
                 /page/** = anon
                 <!-- 静态资源允许访问 -->
-                /static/** = anon
-                /assets/** = anon
+                /resources/** = anon
+              <!--  /assets/** = anon-->
 
                 /user = authc
                 /role = authc

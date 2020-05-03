@@ -6,7 +6,7 @@
 
   <groupId>lipeng</groupId>
   <artifactId>guoguo</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.1-SNAPSHOT</version>
   <packaging>war</packaging>
 
   <name>guoguo Maven Webapp</name>
@@ -340,8 +340,9 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>13</source>
-                    <target>13</target>
+                    <skip>true</skip>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
 
@@ -365,6 +366,8 @@
         </excludes>
       </resource>
     </resources>
+
+      <finalName>ziyouliulan</finalName>
   </build>
 
 
