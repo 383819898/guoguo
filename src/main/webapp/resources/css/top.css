@@ -1,0 +1,38 @@
+
+/*#头部*/
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td{
+    padding: 0; margin: 0;
+}
+
+.t{width:100%; height:30px; border-bottom:#dedede 1px solid}
+.top{width:1060px; height:28px; line-height:28px; padding:2px 0 0 0;margin: 0 auto;}
+.top p{width:650px; height:26px; float:left; font-size:12px; font-weight:normal; overflow:hidden; display:block}
+.top span{width:80px; height:28px; line-height:28px; float:right; text-align:center; display:block; background:/*url(sanjiao.png)*/ left no-repeat}
+
+.top{
+    width:960px;
+    height:26px;
+    line-height:25px;
+    margin:0 auto;
+}
+.top span{
+    float:right;
+}
+.head{
+    width:960px;
+    margin:12px auto;
+}
+.logo {
+    width: 270px; background: /*url()*/ no-repeat; float: left; height: 105px;
+}
+.logo a {
+    text-indent: -999em; display: block; height: 66px; overflow: hidden
+}
+.header1{margin: 0px auto; width: 1060px; overflow:hidden;}
+.search_s{font: 12px/25px arial;margin: 0px 5px 0px 0px;padding: 0px 5px;border: 2px solid #f60;width: 350px;height: 30px; float:left;
+}
+.search_s_botton{background: #f60;font: 700 12px/27px arial;margin: 0px;padding: 0px;border: 0px currentcolor;
+    width: 60px;height: 32px;text-align: center;color: rgb(255, 255, 255);float: right;cursor: pointer;
+}
+
+.cl:after{content:".";display:block;height:0;clear:both;visibility:hidden;}.cl{zoom:1;}.hidefocus{outline:none;}
